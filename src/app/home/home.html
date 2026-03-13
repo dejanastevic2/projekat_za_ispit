@@ -1,0 +1,17 @@
+@if(toys().length > 0) {
+  <ul>
+    @for (t of toys(); track $index) {
+      <li>
+        <h3>{{ t.name }}</h3>
+        <ul>
+          <li>Tip: <strong>{{ t.type }}</strong></li>
+          <li>Cena: <strong>{{ t.price }} RSD</strong></li>
+          <li>Detalji: <a [routerLink]="['/details', t.id]">Pogledaj</a></li>
+        </ul>
+      </li>
+    }
+  </ul>
+} @else {
+  <h3>Podaci se učitavaju</h3>
+  <p>Molimo sačekajte...</p>
+}

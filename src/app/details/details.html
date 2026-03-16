@@ -1,1 +1,37 @@
-<p>details works!</p>
+@if (toy()) {
+<div class="toy-container">
+  <div class="toy-image">
+    <img [src]="utils.getToyImage(toy())" [alt]="toy()?.name" style="max-width: 100%; height: auto; border-radius: 8px;">
+  </div>
+
+  <div class="toy-info">
+    <h2>{{ toy()?.name }}</h2>
+    <p class="description">{{ toy()?.description }}</p>
+
+    <hr>
+
+    <ul>
+      <li><strong>ID:</strong> {{ toy()?.toyId }}</li>
+      <li><strong>Tip:</strong> {{ toy()?.type?.name }}</li> 
+      <li><strong>Uzrast:</strong> {{ toy()?.ageGroup?.name }}</li>
+      <li><strong>Ciljna grupa:</strong> {{ toy()?.targetGroup }}</li>
+      <li><strong>Datum proizvodnje:</strong> {{ utils.formatDate(toy()!.productionDate) }}</li>
+      <li><strong>Cena:</strong> {{ toy()?.price }} RSD</li>
+      <li><strong>Ocena:</strong> {{ toy()?.rating }} / 5</li>
+
+      @if (toy()?.status) {
+        <li><strong>Status:</strong> <span class="status-badge">{{ toy()?.status }}</span></li>
+      }
+
+      @if (toy()?.userReview) {
+        <li class="review-box">
+          <strong>Recenzija korisnika:</strong>
+          <p><em>"{{ toy()?.userReview }}"</em></p>
+        </li>
+      }
+    </ul>
+  </div>
+</div>
+} @else {
+  <p>Učitavanje podataka o igrački...</p>
+}

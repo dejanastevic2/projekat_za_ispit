@@ -1,0 +1,13 @@
+.toy-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.details-card{
+    width: 40%;
+}
+.details-img{
+    width: 100%;
+}
+

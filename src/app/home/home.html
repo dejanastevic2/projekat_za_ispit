@@ -5,20 +5,38 @@
       
       <img mat-card-image [src]="utils.getToyImage(t)" [alt]="t.name">
       
-      <mat-card-content>
-        <h3>{{t.name}}</h3>
-        <p>Tip: {{t.type.name}}</p> 
-        <p>Proizvedeno: {{utils.formatDate(t.productionDate)}} </p>
-        <p>Uzrast: {{t.ageGroup.name}}</p>
+      <mat-card-content class="card-contentt">
+           
+      <mat-card-title><strong>{{t.name}}</strong></mat-card-title>
+       <!--<mat-card-subtitle>{{t.type.name}}</mat-card-subtitle>-->
+      <mat-card-subtitle>Age: {{t.ageGroup.name}}</mat-card-subtitle>
+     <!-- <mat-card-subtitle>Proizvedeno: {{utils.formatDate(t.productionDate)}}</mat-card-subtitle>-->
+       <mat-card-subtitle>Price: {{ t.price | number:'1.0-0' }} RSD</mat-card-subtitle>
       </mat-card-content>
-
-      <mat-card-actions>
-        <a [routerLink]="['/details', t.toyId]" mat-button>Detalji</a>
+      <mat-card-footer>
+        <mat-card-actions>
+           <a [routerLink]="['/details', t.toyId]" mat-button>
+            <mat-icon fontIcon="read_more"/>Detalji</a>
+        
+          @if ((authService.getActiveUser())) {
+            <a [routerLink]="['/details', t.toyId]" mat-button>
+            <mat-icon fontIcon="add_shopping_cart"/>Kupi</a>
+          }
       </mat-card-actions>
+      </mat-card-footer>
+      
     </mat-card>
   }
 </div>
-} @else {
-  <h3>Podaci se učitavaju</h3>
-  <p>Molimo sačekajte...</p>
+ 
+} 
+@else {
+  <mat-card class="card-loading">
+    <img src="/loading.gif" class="loading-gif">
+    <mat-card-content>
+      <h3>Podaci se učitavaju</h3>
+      <p>Molimo sačekajte...</p>
+    </mat-card-content>
+  </mat-card>
+ 
 }

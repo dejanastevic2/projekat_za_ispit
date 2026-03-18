@@ -5,14 +5,18 @@ import { RouterLink } from "@angular/router";
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { Utils } from '../utils';
+import {MatIconModule} from '@angular/material/icon';
+import { DecimalPipe } from '@angular/common';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink,MatCardModule, MatButtonModule],
+  imports: [RouterLink,MatCardModule, MatButtonModule,MatIconModule,DecimalPipe],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class Home {
+  public authService=AuthService
   toys = signal<ToyModel[]>([]);
 
   constructor( public utils: Utils) {

@@ -1,19 +1,26 @@
 import { Component, signal, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import axios from 'axios';
 import { ToyModel } from '../models/toy.model';
 import { Utils } from '../utils'; // Proveri da li je putanja do utils fajla tačna
 import { CommonModule } from '@angular/common';
+import { MatCard, MatCardModule } from '@angular/material/card';
+import {MatListItem, MatListModule} from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../services/auth.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,MatCardModule,MatListModule,MatIconModule,RouterLink,MatButtonModule],
   templateUrl: './details.html',
   styleUrl: './details.css',
 })
 export class Details {
+  public authService=AuthService
   toy = signal<ToyModel | null>(null);
+
 
   constructor(
     private route: ActivatedRoute,

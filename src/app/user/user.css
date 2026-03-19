@@ -1,0 +1,24 @@
+.user-card {
+    width: 460px;
+    flex-direction: column;
+}
+
+.user-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: stretch;
+    justify-content: center;
+}
+.user-details{
+    margin-bottom: 10px;
+}
+.user-info{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: start;
+}
+.user-image{
+    border-radius: 16px;
+}

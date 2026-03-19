@@ -20,6 +20,7 @@ import { Alerts } from '../alerts';
   styleUrl: './user.css',
 })
 export class User {
+  
   public activeUser=AuthService.getActiveUser()
   favorites = signal<ToyType[]>([]);
   public oldPassword=''
@@ -33,6 +34,9 @@ export class User {
     }
     ToyService.getToyType()
     .then(rsp=>this.favorites.set(rsp.data))
+  }
+  getAvatarUrl() {
+    return `https://ui-avatars.com/api/?name=${this.activeUser?.firstName}+${this.activeUser?.lastName}`;
   }
   updateUser(){
     Alerts.confirm('Are you sure you user info?',

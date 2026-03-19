@@ -1,13 +1,11 @@
 @if (favorites().length>0) {
-<mat-card class="small-card">
+<div class="user-wrapper">
+<mat-card class="user-card">
     <mat-card-header>
         <h1>User details</h1>
     </mat-card-header>
         <mat-card-content>
-            <mat-form-field class="full-width">
-                <mat-label>Email</mat-label>
-                <input matInput type="email" [(ngModel)]="activeUser!.email" disabled>
-            </mat-form-field>
+
             <mat-form-field class="full-width">
                 <mat-label>FirstName</mat-label>
                 <input matInput type="email" [(ngModel)]="activeUser!.firstName">
@@ -42,7 +40,23 @@
             <mat-icon fontIcon="save" />Save Changes</button>
     </mat-card-actions>
 </mat-card>
-<mat-card class="small-card">
+<div>
+    <mat-card class="user-card user-details">
+        <mat-card-content>
+           <div class="user-info">
+                <mat-card-header>
+                    <h1>Acount info</h1>
+                 </mat-card-header>
+             <img [src]="getAvatarUrl()" class="user-image">
+                <h3>{{activeUser?.email}}</h3>
+           </div>
+        </mat-card-content>
+    <mat-card-header>
+       
+    </mat-card-header>
+       
+    </mat-card>
+     <mat-card class="user-card ">
     <mat-card-header>
         <h1>Change Password</h1>
     </mat-card-header>
@@ -62,12 +76,15 @@
            
        
         
-    </mat-card-content>
-    <mat-card-actions>
- <button  type="button" matButton (click)="updatePassword()">
-            <mat-icon fontIcon="save" />Update Password</button>
-    </mat-card-actions>
-</mat-card>
+             </mat-card-content>
+                <mat-card-actions>
+             <button  type="button" matButton (click)="updatePassword()">
+                <mat-icon fontIcon="password" />Update Password</button>
+         </mat-card-actions>
+    </mat-card>
+    </div>
+</div>
+
 } @else {
      <app-loading />
 }

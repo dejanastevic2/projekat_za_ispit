@@ -11,44 +11,44 @@
       <mat-list>
           <mat-list-item>
             <mat-icon matListItemIcon>videogame_asset</mat-icon>
-            <div matListItemTitle>Opis igračke: </div>
+            <div matListItemTitle>Toy Description: </div>
             <div matListItemLine> {{ toy()?.description }}</div>
           </mat-list-item> 
            <mat-list-item>
             <mat-icon matListItemIcon>sports_esports</mat-icon>
-            <div matListItemTitle>Tip igračke: </div>
+            <div matListItemTitle>Toy Type: </div>
             <div matListItemLine> {{ toy()?.type?.name }}</div>
           </mat-list-item> 
           <mat-list-item>
             <mat-icon matListItemIcon>child_care</mat-icon>
-            <div matListItemTitle>Uzrast:</div>
+            <div matListItemTitle>Age:</div>
             <div matListItemLine>{{ toy()?.ageGroup?.name }}</div>
           </mat-list-item>
           <mat-list-item>
             <mat-icon matListItemIcon>savings</mat-icon>
-            <div matListItemTitle>Cena: </div>
+            <div matListItemTitle>Price: </div>
             <div matListItemLine>{{ toy()?.price }} RSD</div>
           </mat-list-item>
           <mat-list-item>
             <mat-icon matListItemIcon>girl</mat-icon>
-            <div matListItemTitle>Ciljna grupa:</div>
+            <div matListItemTitle>TargetGroup:</div>
             <div matListItemLine>{{ toy()?.targetGroup }}</div>
           </mat-list-item>
              <mat-list-item>
             <mat-icon matListItemIcon>calendar_month</mat-icon>
-            <div matListItemTitle>Datum proizvodnje: </div>
+            <div matListItemTitle>Production Date: </div>
             <div matListItemLine>{{ utils.formatDate(toy()!.productionDate) }}</div>
           </mat-list-item> 
       </mat-list>
     </mat-card-content>
     @if ((authService.getActiveUser())) {
-    <mat-card-actions>
-   
+   <mat-card-actions>
+ 
 
-           <a [routerLink]="['/cart', toy()?.toyId]" mat-button>
-            <mat-icon fontIcon="add_shopping_cart"/>Kupi</a>
-          
-          </mat-card-actions>
+     <button [routerLink]="['/details', toy()?.toyId, 'order']" mat-button>
+         <mat-icon fontIcon="shopping_bag"></mat-icon> Order Toy
+      </button>
+  </mat-card-actions>
           }
   </mat-card>
 

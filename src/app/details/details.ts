@@ -1,8 +1,7 @@
 import { Component, signal, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-
 import { ToyModel } from '../models/toy.model';
-import { Utils } from '../utils'; // Proveri da li je putanja do utils fajla tačna
+import { Utils } from '../utils';
 import { CommonModule } from '@angular/common';
 import { MatCard, MatCardModule } from '@angular/material/card';
 import {MatListItem, MatListModule} from '@angular/material/list';
@@ -16,7 +15,7 @@ import { Home } from "../home/home";
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatListModule, MatIconModule, RouterLink, MatButtonModule, Loading, Home],
+  imports: [CommonModule, MatCardModule, MatListModule, MatIconModule, RouterLink, MatButtonModule, Loading,],
   templateUrl: './details.html',
   styleUrl: './details.css',
 })

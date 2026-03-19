@@ -8,19 +8,19 @@
       <mat-card-content class="card-contentt">
            
       <mat-card-title><strong>{{t.name}}</strong></mat-card-title>
-       <!--<mat-card-subtitle>{{t.type.name}}</mat-card-subtitle>-->
+      
       <mat-card-subtitle>Age: {{t.ageGroup.name}}</mat-card-subtitle>
-     <!-- <mat-card-subtitle>Proizvedeno: {{utils.formatDate(t.productionDate)}}</mat-card-subtitle>-->
+    
        <mat-card-subtitle>Price: {{ t.price | number:'1.0-0' }} RSD</mat-card-subtitle>
       </mat-card-content>
       <mat-card-footer>
         <mat-card-actions>
            <a [routerLink]="['/details', t.toyId]" mat-button>
-            <mat-icon fontIcon="read_more"/>Detalji</a>
+            <mat-icon fontIcon="read_more"/>Details</a>
         
           @if ((authService.getActiveUser())) {
-            <a [routerLink]="['/details', t.toyId]" mat-button>
-            <mat-icon fontIcon="add_shopping_cart"/>Kupi</a>
+            <a [routerLink]="['/details', t.toyId, 'order']" mat-button>
+            <mat-icon fontIcon="add_shopping_cart"/>Buy</a>
           }
       </mat-card-actions>
       </mat-card-footer>

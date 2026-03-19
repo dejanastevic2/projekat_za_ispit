@@ -1,0 +1,84 @@
+@if (toy()!=null) {
+    <div class="order-summary-section">
+        
+        <mat-card class="small-card" appearance="outlined">
+            <img mat-card-image [src]="utils.getToyImage(toy()!)" [alt]="toy()?.name">
+            
+            <mat-card-content>
+                <h2 class="toy-title">{{ toy()?.name }}</h2>
+                
+                <div class="price-info">
+                    <span class="label">Unit Price:</span>
+                    <span class="value">{{ toy()?.price }} RSD</span>
+                </div>
+
+                <mat-form-field appearance="outline" class="quantity-field">
+                    <mat-label>Quantity</mat-label>
+                    <input matInput type="number" [(ngModel)]="quantity" min="1" (change)="updateTotal()">
+                    <mat-icon matSuffix>numbers</mat-icon>
+                </mat-form-field>
+
+                <hr class="divider">
+
+                <div class="price-row">
+                    <span>Item(x{{ quantity }}):</span>
+                    <span>{{ (toy()?.price ?? 0) * quantity }} RSD</span>
+                </div>
+                <div class="price-row">
+                    <span>Shipping:</span>
+                    <span>300 RSD</span>
+                </div>
+                <div class="price-row total-row">
+                    <strong>TOTAL:</strong>
+                    <strong>{{ ((toy()?.price ?? 0) * quantity) + 300 }} RSD</strong>
+                </div>
+            </mat-card-content>
+            </mat-card>
+
+        <div class="order-form-section">
+            <mat-card appearance="outlined">
+                <mat-card-header>
+                    <h1>Shipping Details</h1>
+                </mat-card-header>
+                
+                <mat-card-content>
+                    <mat-form-field class="full-width">
+                        <mat-label>First Name</mat-label>
+                        <input matInput [value]="activeUser!.firstName" >
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput [value]="activeUser!.lastName" >
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width">
+                        <mat-label>Shipping Address</mat-label>
+                        <input matInput [(ngModel)]="address">
+                        <mat-icon matSuffix>home</mat-icon>
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width">
+                        <mat-label>Phone Number</mat-label>
+                        <input matInput [(ngModel)]="phone">
+                        <mat-icon matSuffix>phone</mat-icon>
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width">
+                        <mat-label>Delivery Note (Optional)</mat-label>
+                        <textarea matInput [(ngModel)]="note" placeholder=" Apartment 5, 3nd floor..."></textarea>
+                    </mat-form-field>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" (click)="confirmOrder()">
+                        <mat-icon fontIcon="shopping_bag"></mat-icon> confirm purchase
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+
+    </div>
+} @else {
+    <app-loading/>
+}

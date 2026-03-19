@@ -10,16 +10,22 @@ import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { ToyType } from '../models/toy.model';
 import { ToyService } from '../services/toy.service';
+import { Loading } from '../loading/loading';
+import { Alerts } from '../alerts';
 
 @Component({
   selector: 'app-user',
-  imports: [MatCardModule, MatInputModule,MatButtonModule,MatIconModule,FormsModule,MatSelectModule],
+  imports: [MatCardModule, MatInputModule,MatButtonModule,MatIconModule,FormsModule,MatSelectModule,Loading],
   templateUrl: './user.html',
   styleUrl: './user.css',
 })
 export class User {
   public activeUser=AuthService.getActiveUser()
   favorites = signal<ToyType[]>([]);
+  public oldPassword=''
+  public newPassword=''
+  public repeatPassword=''
+  
  constructor( private router: Router){
     if(!AuthService.getActiveUser()){
       router.navigate(['/login'])
@@ -29,7 +35,36 @@ export class User {
     .then(rsp=>this.favorites.set(rsp.data))
   }
   updateUser(){
+    Alerts.confirm('Are you sure you user info?',
+      ()=> {
     AuthService.updateActiveUser(this.activeUser!)
-    alert("User updated successfuly")
+    Alerts.success('User updated successfuly')
+      })
+  }
+  updatePassword(){
+    Alerts.confirm('Are you sure you want to change password?',
+      ()=> {
+         if(this.oldPassword != this.oldPassword ){
+      Alerts.error("Invalid old password!")
+      return
+    }
+    if(this.newPassword.length<6){
+      Alerts.error('Passwords must be at least 6 characters long')
+      return
+    }
+    if (this.newPassword!=this.repeatPassword){
+      Alerts.error('Passwords dont match')
+      return;
+    }
+    if(this.newPassword==this.activeUser?.password){
+      Alerts.error('New password cant be the same as the old one')
+      return
+    }
+    AuthService.updateActiveUserPassword(this.newPassword)
+    Alerts.success('Password is sucessfully changed')
+    AuthService.logout()
+    this.router.navigate(['/login'])
+      })
+   
   }
 }

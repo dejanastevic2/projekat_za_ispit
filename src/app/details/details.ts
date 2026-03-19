@@ -10,11 +10,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../services/auth.service';
 import { ToyService } from '../services/toy.service';
 import { MatButtonModule } from '@angular/material/button';
+import { Loading } from '../loading/loading';
+import { Home } from "../home/home";
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CommonModule,MatCardModule,MatListModule,MatIconModule,RouterLink,MatButtonModule],
+  imports: [CommonModule, MatCardModule, MatListModule, MatIconModule, RouterLink, MatButtonModule, Loading, Home],
   templateUrl: './details.html',
   styleUrl: './details.css',
 })

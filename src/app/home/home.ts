@@ -8,10 +8,10 @@ import {MatIconModule} from '@angular/material/icon';
 import { DecimalPipe } from '@angular/common';
 import { AuthService } from '../services/auth.service';
 import { ToyService } from '../services/toy.service';
-
+import { Loading } from '../loading/loading';
 @Component({
   selector: 'app-home',
-  imports: [RouterLink,MatCardModule, MatButtonModule,MatIconModule,DecimalPipe],
+  imports: [RouterLink,MatCardModule, MatButtonModule,MatIconModule,DecimalPipe, Loading],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -22,7 +22,6 @@ export class Home {
   constructor( public utils: Utils) {
     ToyService.getToy()
     .then(rsp => {
-    // Sortiramo igračke prema datumu proizvodnje (od najnovije ka najstarijoj)
     const sorted = rsp.data.sort((t1: any, t2: any) => {
       return new Date(t2.productionDate).getTime() - new Date(t1.productionDate).getTime();
     });

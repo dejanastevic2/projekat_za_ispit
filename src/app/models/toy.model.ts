@@ -10,7 +10,7 @@ export interface ToyModel {
   toyId: number;               
   name: string;            
   description: string;      
-  //type: string;     
+    
   type: ToyType;
   ageGroup: AgeGroup;        
   targetGroup: 'svi' | 'dečak' | 'devojčica'; 

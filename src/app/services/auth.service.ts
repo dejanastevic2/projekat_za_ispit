@@ -1,30 +1,26 @@
 import { UserModel } from "../models/user.model"
 
-const USERES='users'
+const USERS='users'
 const ACTIVE='active'
 export class AuthService{
     static getUsers(): UserModel[] {
-    
-    if (localStorage.getItem(USERES) == null) {
-        
-        const initialUsers: UserModel[] = [{
+        const baseUser: UserModel = {
             email: 'user@example.com',
+            firstName:'Example',
+            lastName:'User',
             password: 'user123',
-            favorites: 'Muzički tamburina',
-            firstName: 'Example',
-            lastName: 'User',
-            phone: '064123456',    
-            address: 'Ulica 123',
+            phone: '064123456',
+            address:'Ulica 123',
+            favorites:'Muzički tamburina',
             orders: []
-        }];
-        // 3. Sačuvaj taj NIZ
-        localStorage.setItem(USERES, JSON.stringify(initialUsers));
-    }
+
+        }
+        if (localStorage.getItem(USERS) == null) {
+            localStorage.setItem(USERS, JSON.stringify([baseUser]))
+        }
+        return JSON.parse(localStorage.getItem(USERS)!)
+}    
     
-    // 4. Vrati podatke (sada su sigurno niz)
-    const data = localStorage.getItem(USERES);
-    return data ? JSON.parse(data) : [];
-}
     static login(email: string, password: string){
         const users=this.getUsers()
         for (let u of users){
@@ -42,6 +38,19 @@ export class AuthService{
             }
         }
         return null
+    }
+    static updateActiveUser(newUserData:UserModel){
+        const users=this.getUsers()
+        for(let u of users){
+            if(u.email===localStorage.getItem(ACTIVE)){
+                u.firstName=newUserData.firstName
+                u.lastName=newUserData.lastName
+                u.address=newUserData.address
+                u.phone=newUserData.phone
+                u.favorites=newUserData.favorites
+            }
+        }
+        localStorage.setItem(USERS, JSON.stringify(users))
     }
     static logout(){
         localStorage.removeItem(ACTIVE)

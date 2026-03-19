@@ -1,5 +1,4 @@
 import { Component, signal } from '@angular/core';
-import axios from 'axios';
 import { ToyModel } from '../models/toy.model'; 
 import { RouterLink } from "@angular/router";
 import {MatButtonModule} from '@angular/material/button';
@@ -8,6 +7,7 @@ import { Utils } from '../utils';
 import {MatIconModule} from '@angular/material/icon';
 import { DecimalPipe } from '@angular/common';
 import { AuthService } from '../services/auth.service';
+import { ToyService } from '../services/toy.service';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +20,7 @@ export class Home {
   toys = signal<ToyModel[]>([]);
 
   constructor( public utils: Utils) {
-    axios.get('https://toy.pequla.com/api/toy')
+    ToyService.getToy()
     .then(rsp => {
     // Sortiramo igračke prema datumu proizvodnje (od najnovije ka najstarijoj)
     const sorted = rsp.data.sort((t1: any, t2: any) => {
